@@ -1,6 +1,6 @@
 PORT=3000
 
-DATABASE_URL=postgresql://labresmanager_db_owner:npg_x7NE1DslhIWv@ep-shy-water-a18uk3ck-pooler.ap-southeast-1.aws.neon.tech/labresmanager_db?sslmode=require
+DATABASE_URL=postgresql://labresmanager_db_owner:npg_x7NE1DslhIWv@ep-shy-water-a18uk3ck-pooler.ap-southeast-1.aws.neon.tech/hackestate_db?sslmode=require
 
 JWT_SECRET=TOGODBETHEGLORY
 JWT_EXPIRATION=1d

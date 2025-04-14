@@ -1,106 +1,11 @@
 {
-  "id": "97e74e7e-1707-474d-947e-ac7228e478b7",
+  "id": "b1ffe57e-65f8-445e-aeaa-8b87e59974ea",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
     "public.user": {
       "name": "user",
-      "schema": "",
-      "columns": {
-        "pid": {
-          "name": "pid",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "password": {
-          "name": "password",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "dob": {
-          "name": "dob",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.test_results": {
-      "name": "test_results",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "user_pid": {
-          "name": "user_pid",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "test_name": {
-          "name": "test_name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "binary_pdf": {
-          "name": "binary_pdf",
-          "type": "bytea",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "test_date": {
-          "name": "test_date",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "test_results_user_pid_user_pid_fk": {
-          "name": "test_results_user_pid_user_pid_fk",
-          "tableFrom": "test_results",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_pid"
-          ],
-          "columnsTo": [
-            "pid"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.admin": {
-      "name": "admin",
       "schema": "",
       "columns": {
         "id": {
@@ -123,11 +28,11 @@
         },
         "role": {
           "name": "role",
-          "type": "role",
+          "type": "user_role",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'admin'"
+          "default": "'user'"
         },
         "created_at": {
           "name": "created_at",
@@ -135,32 +40,31 @@
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
+        },
+        "profile_url": {
+          "name": "profile_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "admin_email_unique": {
-          "name": "admin_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        }
-      },
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.role": {
-      "name": "role",
+    "public.user_role": {
+      "name": "user_role",
       "schema": "public",
       "values": [
-        "admin",
-        "super_admin"
+        "user",
+        "agent",
+        "developer"
       ]
     }
   },

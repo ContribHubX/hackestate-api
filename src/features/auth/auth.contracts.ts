@@ -6,7 +6,7 @@ import {z} from "zod";
 
 export const loginSchema = z.object(
     {
-        pid: z.string(),
+        email: z.string(),
         password: passwordSchema
     }
 )
@@ -18,7 +18,8 @@ export const loginAdminSchema = z.object({
 
 export const registerSchema = z.object(
     {
-        pid : z.string()
+        email: z.string(),
+        password: passwordSchema
     }
 )
 

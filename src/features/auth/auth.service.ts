@@ -1,7 +1,7 @@
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Container, Inject, Service } from "typedi";
 import * as schema from "@/database/schema";
-import { User, UserInsert, Admin } from "@/database/schema";
+import { User, UserInsert } from "@/database/schema";
 import {
   LoginSchema,
   LoginResponse,
@@ -51,24 +51,24 @@ class AuthService {
     return createdUser;
   }
 
-  async UpdateUser(user: UserInsert): Promise<User> {
-    // NOTE only update password
-    const { pid, dob, createdAt, ...fieldsUpdated } = user;
+  // async UpdateUser(user: UserInsert): Promise<User> {
+  //   // NOTE only update password
+  //   const { pid, dob, createdAt, ...fieldsUpdated } = user;
 
-    const hashedPassword = await bcrypt.hash(fieldsUpdated.password!, 10);
+  //   const hashedPassword = await bcrypt.hash(fieldsUpdated.password!, 10);
 
-    const [updatedUser] = await this.db
-      .update(schema.user)
-      .set({ ...fieldsUpdated, password: hashedPassword})
-      .where(eq(schema.user.pid, user.pid!))
-      .returning();
+  //   const [updatedUser] = await this.db
+  //     .update(schema.user)
+  //     .set({ ...fieldsUpdated, password: hashedPassword})
+  //     .where(eq(schema.user.pid, user.pid!))
+  //     .returning();
 
-    return updatedUser;
-  }
+  //   return updatedUser;
+  // }
 
   async Register(registerRequest: RegisterSchema) {
     const existingUser = await this.db.query.user.findFirst({
-      where: eq(schema.user.pid, registerRequest.pid),
+      where: eq(schema.user.email, registerRequest.email),
     });
 
     if (existingUser) {
@@ -80,33 +80,33 @@ class AuthService {
     });
   }
 
-  async RegisterAdmin(
-    registerAdminRequest: RegisterAdminSchema
-  ): Promise<Admin> {
-    const existingAdmin = await this.db.query.admin.findFirst({
-      where: eq(schema.admin.email, registerAdminRequest.email),
-    });
+  // async RegisterAdmin(
+  //   registerAdminRequest: RegisterAdminSchema
+  // ): Promise<Admin> {
+  //   const existingAdmin = await this.db.query.admin.findFirst({
+  //     where: eq(schema.admin.email, registerAdminRequest.email),
+  //   });
 
-    if (existingAdmin) {
-      throw AppError.badRequest("admin already exists");
-    }
+  //   if (existingAdmin) {
+  //     throw AppError.badRequest("admin already exists");
+  //   }
 
-    const hashedPassword = await bcrypt.hash(registerAdminRequest.password, 10);
+  //   const hashedPassword = await bcrypt.hash(registerAdminRequest.password, 10);
 
-    const [createdAdmin] = await this.db
-      .insert(schema.admin)
-      .values({
-        ...registerAdminRequest,
-        password: hashedPassword
-      })
-      .returning();
+  //   const [createdAdmin] = await this.db
+  //     .insert(schema.admin)
+  //     .values({
+  //       ...registerAdminRequest,
+  //       password: hashedPassword
+  //     })
+  //     .returning();
 
-    return createdAdmin;
-  }
+  //   return createdAdmin;
+  // }
 
   async Login(loginRequest: LoginSchema): Promise<LoginResponse> {
     const existingUser = await this.db.query.user.findFirst({
-      where: eq(schema.user.pid, loginRequest.pid),
+      where: eq(schema.user.email, loginRequest.email),
     });
 
     if (!existingUser) {
@@ -130,61 +130,61 @@ class AuthService {
     };
   }
 
-  async LoginAdmin(
-    loginAdminSchema: LoginAdminSchema
-  ): Promise<LoginAdminResponse> {
-    const existingAdmin = await this.db.query.admin.findFirst({
-      where: eq(schema.admin.email, loginAdminSchema.email),
-    });
+  // async LoginAdmin(
+  //   loginAdminSchema: LoginAdminSchema
+  // ): Promise<LoginAdminResponse> {
+  //   const existingAdmin = await this.db.query.admin.findFirst({
+  //     where: eq(schema.admin.email, loginAdminSchema.email),
+  //   });
 
-    if (!existingAdmin) {
-      throw AppError.notFound("User doesn't exist");
-    }
+  //   if (!existingAdmin) {
+  //     throw AppError.notFound("User doesn't exist");
+  //   }
 
-    const isMatch = await bcrypt.compare(
-      loginAdminSchema.password,
-      existingAdmin.password!
-    );
+  //   const isMatch = await bcrypt.compare(
+  //     loginAdminSchema.password,
+  //     existingAdmin.password!
+  //   );
 
-    if (!isMatch) {
-      throw AppError.forbidden("Invalid Credentials");
-    }
+  //   if (!isMatch) {
+  //     throw AppError.forbidden("Invalid Credentials");
+  //   }
 
-    const token = provideToken(existingAdmin);
+  //   const token = provideToken(existingAdmin);
 
-    return {
-      admin: existingAdmin,
-      token,
-    };
-  }
+  //   return {
+  //     admin: existingAdmin,
+  //     token,
+  //   };
+  // }
 
-  async CheckPid(pid: string): Promise<CheckPidResponse> {
-    const existingUser = await this.db.query.user.findFirst({
-      where: eq(schema.user.pid, pid),
-    });
+  // async CheckPid(pid: string): Promise<CheckPidResponse> {
+  //   const existingUser = await this.db.query.user.findFirst({
+  //     where: eq(schema.user.pid, pid),
+  //   });
 
-    if (!existingUser) {
-      return {
-        hasPassword: false,
-        hasPid: false,
-        pid,
-      };
-    }
+  //   if (!existingUser) {
+  //     return {
+  //       hasPassword: false,
+  //       hasPid: false,
+  //       pid,
+  //     };
+  //   }
 
-    if (!existingUser.password) {
-      return {
-        hasPassword: false,
-        hasPid: true,
-        pid,
-      };
-    }
+  //   if (!existingUser.password) {
+  //     return {
+  //       hasPassword: false,
+  //       hasPid: true,
+  //       pid,
+  //     };
+  //   }
 
-    return {
-      hasPassword: true,
-      hasPid: true,
-      pid,
-    };
-  }
+  //   return {
+  //     hasPassword: true,
+  //     hasPid: true,
+  //     pid,
+  //   };
+  // }
 
   async GetUser(): Promise<User | undefined> {
     return this.httpContext.getRequest().currentUser;

@@ -1,1 +1,0 @@
-ALTER TABLE "test_results" ADD COLUMN "size" integer NOT NULL;

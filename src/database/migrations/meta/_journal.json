@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1743955977946,
-      "tag": "0000_added_admin_table",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1744043874821,
-      "tag": "0001_added_size_column_in_test_result",
+      "when": 1744597822444,
+      "tag": "0000_initial",
       "breakpoints": true
     }
   ]
