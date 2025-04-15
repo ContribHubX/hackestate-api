@@ -23,7 +23,7 @@ export async function verifyAuth(
     token = authHeader.split(" ")[1];
   }
 
-  if (!token) {
+  if (!token) {2
      next(AppError.unauthorized("Access token is missing"));
      return;
   }

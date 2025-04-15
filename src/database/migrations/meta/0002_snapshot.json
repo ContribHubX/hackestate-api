@@ -1,6 +1,6 @@
 {
-  "id": "5ed42088-e4a4-473c-929d-2634a4603116",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "337d6b29-39d7-45ca-80f0-9868e6e3b0c1",
+  "prevId": "467ec57b-bcaf-40c9-9c05-0cde29408c99",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -80,6 +80,18 @@
         },
         "user_id": {
           "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_name": {
+          "name": "listing_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "persona_details": {
+          "name": "persona_details",
           "type": "varchar",
           "primaryKey": false,
           "notNull": true

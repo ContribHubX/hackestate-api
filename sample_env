@@ -1,6 +1,6 @@
 PORT=3000
 
-DATABASE_URL=postgresql://labresmanager_db_owner:npg_x7NE1DslhIWv@ep-shy-water-a18uk3ck-pooler.ap-southeast-1.aws.neon.tech/hackestate_db?sslmode=require
+DATABASE_URL=
 
 JWT_SECRET=TOGODBETHEGLORY
 JWT_EXPIRATION=1d
@@ -13,15 +13,4 @@ EMAIL_PASSWORD = __PASSWORD__
 EMAIL_SECURE= false
 EMAIL_REJECT_UNAUTHORIZED = false
 
-GOOGE_CLIENT_ID=489439615834-flcg59goscekjci29bnn383qkhj4dbuf.apps.googleusercontent.com
-GOOGE_CLIENT_SECRET=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
-GOOGE_REDIRECT_URL=https://lvthp97m-5173.asse.devtunnels.ms/auth/google/callback
-
-GITHUB_CLIENT_ID=Ov23lig23hrzoYbCjNmz
-GITHUB_CLIENT_SECRET=4e26c3d8a771a72ba09f4eea1e82d857c544e98f
-GITHUB_REDIRECT_URL=https://lvthp97m-5173.asse.devtunnels.ms/auth/github/callback
-
-CLOUDINARY_CLOUD_NAME=dt0wmf7iy
-CLOUDINARY_API_KEY=937248316897114
-CLOUDINARY_API_SECRET=0PJokPXPGfDmbw23cildVIjOQJA
 

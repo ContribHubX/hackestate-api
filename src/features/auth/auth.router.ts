@@ -34,6 +34,24 @@ authRouter.post(
   }
 );
 
+authRouter.post(
+  "/auth/register",
+  validateData(registerSchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const authService = Container.get(AuthService);
+      await authService.Register(req.body);
+
+      
+      res.status(201).json({
+        message: "succesfully registered"
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 // authRouter.post(
 //   "/auth/admin/login",
 //   validateData(loginAdminSchema),

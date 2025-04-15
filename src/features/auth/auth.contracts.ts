@@ -1,6 +1,6 @@
 import { passwordSchema } from "@/common/utils/common-validation";
 import { Admin, adminRole } from "@/database/schema/admin";
-import { User } from "@/database/schema/user";
+import { User, userRole } from "@/database/schema/user";
 import {z} from "zod";
 
 
@@ -19,7 +19,10 @@ export const loginAdminSchema = z.object({
 export const registerSchema = z.object(
     {
         email: z.string(),
-        password: passwordSchema
+        password: passwordSchema,
+        role: z.enum([...userRole.enumValues]),
+        contactNumber: z.string(),
+        name: z.string()
     }
 )
 

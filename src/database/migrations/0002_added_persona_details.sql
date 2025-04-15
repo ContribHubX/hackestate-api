@@ -1,0 +1,1 @@
+ALTER TABLE "persona" ADD COLUMN "persona_details" varchar NOT NULL;

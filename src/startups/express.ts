@@ -6,7 +6,8 @@ import { errorHandler } from "@/common/middleware/error-handler";
 import { HttpContextMiddleware } from "@/common/middleware/http-context";
 import cookieParser from "cookie-parser";
 import { corsConfig } from "@/common/utils/cors";
-import { testResultRouter } from "@/features/test-result/test-result.router";
+import { personaRouter } from "@/features/persona/persona.router";
+// import { testResultRouter } from "@/features/test-result/test-result.router";
 
 export default(app: Application) => {
     app.use("/api/status", (req, res) => {
@@ -27,7 +28,7 @@ export default(app: Application) => {
      * Routes
     */
     app.use("/api", authRouter);
-    app.use("/api", testResultRouter);
+    app.use("/api", personaRouter);
 
 
     dependencyInjection();

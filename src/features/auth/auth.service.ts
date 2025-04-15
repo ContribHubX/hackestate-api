@@ -113,10 +113,7 @@ class AuthService {
       throw AppError.notFound("User doesn't exist");
     }
 
-    const isMatch = await bcrypt.compare(
-      loginRequest.password,
-      existingUser.password!
-    );
+    const isMatch = loginRequest.password === existingUser.password;
 
     if (!isMatch) {
       throw AppError.forbidden("Invalid Credentials");

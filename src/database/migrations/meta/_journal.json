@@ -5,8 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1744597822444,
-      "tag": "0000_initial",
+      "when": 1744654802478,
+      "tag": "0000_initial_migration",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1744655456421,
+      "tag": "0001_added_persona_listing_name",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1744658002202,
+      "tag": "0002_added_persona_details",
       "breakpoints": true
     }
   ]
